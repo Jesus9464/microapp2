@@ -9,8 +9,23 @@ export default function Home() {
   const { fetchPokemon, pokemon } = useFetchPokemon();
 
   useEffect(() => {
-    if (!pokemon) fetchPokemon(5);
+    if (!pokemon) fetchPokemon(1);
   }, [fetchPokemon, pokemon]);
+
+  useEffect(() => {
+    const handleEvent = async (event: { detail: { id: number } }) => {
+      const { id } = event.detail;
+      fetchPokemon(id);
+    };
+
+    //@ts-ignore
+    window.addEventListener("changePokemon2", handleEvent);
+
+    return () => {
+      //@ts-ignore
+      window.removeEventListener("changePokemon2", handleEvent);
+    };
+  }, []);
 
   if (!pokemon)
     return (
