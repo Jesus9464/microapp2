@@ -9,7 +9,7 @@ export default function Home() {
   const { fetchPokemon, pokemon } = useFetchPokemon();
 
   useEffect(() => {
-    if (!pokemon) fetchPokemon(1);
+    if (!pokemon) fetchPokemon(10);
   }, [fetchPokemon, pokemon]);
 
   useEffect(() => {
